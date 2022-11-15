@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>logup</title>
+    <style>
+        .msg_err{
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <h1>欢迎注册</h1>
+        <span>已有帐号？</span> <a href="login.html">登录</a>
+    </div>
+    <form action="/logup" method="post" >
+        <table>
+            <tr>
+                <td>UserName</td>
+                <td>
+                    <input type="text" id="username" name="username"><br>
+                    <span class="msg_err" id="username_err">用户名格式错误</span>
+                </td>
+            </tr>
+            <tr>
+                <td>PassWord</td>
+                <td>
+                    <input type="password" id="password" name="password"><br>
+                    <span class="msg_err" id="password_err">密码格式错误</span>
+                </td>
+            </tr>
+        </table>
+        <div class="buttons">
+            <input value="注册" type="submit" id="reg_btn">
+        </div><br class="clear">
+    </form>
+</div>
+<script>
+    var usernameInput = document.getElementById("username");
+    //onblur失去焦点时
+    usernameInput.onblur=checkName;
+    function checkName(){
+        var username = usernameInput.value.trim();
+        var reg=/^\w{4,12}$/;
+        var flag = reg.test(username);
+        if (flag){
+            document.getElementById("username_err").style.display="none"
+        }else{
+            document.getElementById("username_err").style.display="block"
+        }
+        return flag;
+    }
+
+    var passwordInput = document.getElementById("password");
+    passwordInput.onblur=checkpassword;
+    function checkpassword(){
+        var password = passwordInput.value.trim();
+        var reg = /^\w{4,12}$/
+        var flag = reg.test(password);
+        if (flag){
+            document.getElementById("password_err").style.display="none"
+        }else{
+            document.getElementById("password_err").style.display="block"
+        }
+        return flag;
+    }
+    var regForm = document.getElementById("reg-form");
+    regForm.onsubmit = function () {
+        var flag =checkName()&checkpassword();
+        return flag;
+    }
+</script>
+</body>
+</html>
